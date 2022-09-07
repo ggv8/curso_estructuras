@@ -9,32 +9,27 @@ class Stack {
     private:
         List<T>* stackList;
 
-
     public:
         Stack() {
             stackList = new List<T>();
         }
 
         void push(T* pData) {
-
+            stackList->insert(0, pData);
         }
 
         T* pop() {
-            T* result = NULL;
-
-            return result;
+            return stackList->remove(0);
         }
 
         T* top() {
-            T* result = NULL;
-
-            return result;
+            return stackList->find(0);
         }
 
         bool isEmpty() {
-            
+            return stackList->isEmpty();
         }
-}
+};
 
 
 #endif
