@@ -17,12 +17,14 @@ using namespace std;
 class Flight {
 
     private: 
+        string airline;
+        int flightID;
+        int passengers;
         time_t flightTime;
 
     public: 
         Flight(int pHour, int pMinutes) {
-            flightTime = time(NULL);
-            tm *currentTime = localtime(&flightTime);
+            initFlightTime(pHour, pMinutes);    //
         }
 
         char* flightTimeString() {
@@ -30,8 +32,19 @@ class Flight {
             return result;
         }
 
-        int getIntTimeValue() {
-            int result = 0;
+        int getIntTimeValue() { // Convierte solo a horas y minutos en segundos para representar valor
+            tm* currentTime = localtime(&flightTime);
+            int result = (currentTime->tm_hour*3600) + (currentTime->tm_min*60);
             return result;
+        }
+    
+    private:
+        void initFlightTime(int pHour, int pMinutes) {
+            flightTime = time(NULL);
+            tm *currentTime = localtime(&flightTime);
+            flightTime -= (currentTime->tm_hour * 3600);    // Ignora current hour
+            flightTime -= (currentTime->tm_min * 60);       //        current min
+            flightTime -= (currentTime->tm_sec);            //        current sec
+            flightTime += (pHour*3600) + (pMinutes*60); // Incluye desired time
         }
 };
