@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class billsmain {
 
 	/*
-	 * un scanner de billetes retorna a un programa una lista de pares
+	 * un scanner de billetes le envía a un programa una lista de pares
 	 * ordenados (llave, valor) de las características que detectó del billete.
 	 * una función de un programa en java toma dicha información y por medio de 
 	 * de un conjunto de ifs revisa ciertas reglas basado en la información de
@@ -13,7 +13,7 @@ public class billsmain {
 	 * 
 	 * la información es diferente dependiendo del tipo de billete, como se puede ver 
 	 * en las listas de Pair en el main, donde se muestra un par de ejemplos de la información 
-	 * que llega de de un billete de 5000 y uno de 2000.
+	 * que llega de un billete de 5000 y uno de 2000.
 	 * 
 	 * de la misma forma el scanner extrae información particular para cada tipo 
 	 * de denominación y emisión. 
@@ -25,6 +25,29 @@ public class billsmain {
 	 * está dificultando el mantenimiento del programa si tiene la posiblidad de 
 	 * apoyarse en orientación a objetos y herencia. 
 	 */
+	
+	private ArrayList<Bill> validadores;
+	
+	public void init() {
+		validadores = new ArrayList<Bill>();
+		validadores.add(new Bill1000());
+		validadores.add(new Bill2000());
+		validadores.add(new Bill5000());
+	}
+	
+	public boolean validate(ArrayList<Pair> pValues, int pDenominacion) {
+		boolean result = false;
+				
+		for (Bill validator : validadores) {
+			if (validator.getDenominacion()==pDenominacion) {
+				result = validator.validate(pValues);
+				break;
+			}
+		}
+		
+		return result;
+	}
+	
 	public static void main(String[] args) {
 		ArrayList<Pair> cincomil = new ArrayList<Pair>();
 
@@ -39,18 +62,10 @@ public class billsmain {
 		cincomil.add(new Pair("sello","no presente"));
 		cincomil.add(new Pair("lectura","media"));
 		
-		ArrayList<Pair> dosmil = new ArrayList<Pair>();
-		dosmil.add(new Pair("firma de gerente","887d555TAG777d6"));
-		dosmil.add(new Pair("material","plastico"));
-		dosmil.add(new Pair("denominacion","2000"));
-		dosmil.add(new Pair("sello","traslucido"));
-		dosmil.add(new Pair("serie","B"));
-		dosmil.add(new Pair("novidente","no presente"));
-		dosmil.add(new Pair("micro letra","pura vida"));
-		dosmil.add(new Pair("perfecto","20"));
-		dosmil.add(new Pair("hilo","doble"));
-		dosmil.add(new Pair("marca de agua","tiburon"));
+		billsmain prog = new billsmain();
+		prog.init();
 		
+		System.out.println(prog.validate(cincomil, 2000));
 	}
 
 }

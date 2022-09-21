@@ -21,13 +21,14 @@ class Flight {
         int flightID;
         int passengers;
         time_t flightTime;
+        struct tm* flightTimeInfo;
 
     public: 
         Flight(int pHour, int pMinutes) {
             initFlightTime(pHour, pMinutes);    //
         }
 
-        char* flightTimeString() {
+        char* getFlightTimeString() {
             char* result = ctime(&flightTime);
             return result;
         }

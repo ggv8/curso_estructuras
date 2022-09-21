@@ -18,7 +18,7 @@ void fillFlights(int pCantidad, int pStartHour, int pEndHour) {
         flightList.add(newFlight);
 
         // Test prints
-        cout << "FlightTime Str: " << newFlight->flightTimeString();
+        cout << "FlightTime Str: " << newFlight->getFlightTimeString();
         cout << "Time Value: " << newFlight->getIntTimeValue() << "\n\n";
     }
 } 
@@ -28,8 +28,6 @@ int main() {
     fillFlights(10, 0, 9);
 
     Flight vuelo(4,35);
-    cout << vuelo.flightTimeString() << "y el entero es: " << vuelo.getIntTimeValue() << endl;
 
     Flight otroVuelo(14,20);
-    cout << otroVuelo.flightTimeString() << "y el entero es: " << otroVuelo.getIntTimeValue() << endl;
 }
