@@ -16,7 +16,7 @@ class Bubble : public ISort{
             int* temp=NULL;
             for(i=0; i<pNumberList->getSize(); i++){
                 for(j=i+1; j<pNumberList->getSize(); j++){
-                    compare++;
+                    compares++;
                     if (*pNumberList->find(j)<*pNumberList->find(i)){
                         temp=pNumberList->find(i);
 
